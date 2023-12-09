@@ -1,47 +1,47 @@
-import React, { useState, useContext } from 'react'
-import { Context } from '../Context'
-import PropTypes from 'prop-types'
+import React, { useState, useContext } from "react";
+import { Context } from "../Context";
+import PropTypes from "prop-types";
 
 function Image({ img, className }) {
-  const [hovered, setHovered] = useState(false)
+  const [hovered, setHovered] = useState(false);
 
   const { toggleFavorite, addToCart, cartItems, removeFromCart } =
-    useContext(Context)
+    useContext(Context);
 
   function heartIcon() {
     if (img.isFavorite) {
       return (
         <i
-          className='ri-heart-fill favorite'
+          className="ri-heart-fill favorite"
           onClick={() => toggleFavorite(img.id)}
         ></i>
-      )
+      );
     } else if (hovered) {
       return (
         <i
-          className='ri-heart-line favorite'
+          className="ri-heart-line favorite"
           onClick={() => toggleFavorite(img.id)}
         ></i>
-      )
+      );
     }
   }
 
   function cartIcon() {
-    const alreadyInCart = cartItems.some((item) => item.id === img.id)
+    const alreadyInCart = cartItems.some((item) => item.id === img.id);
     if (alreadyInCart) {
       return (
         <i
-          className='ri-shopping-cart-fill cart'
+          className="ri-shopping-cart-fill cart"
           onClick={() => removeFromCart(img.id)}
         ></i>
-      )
+      );
     } else if (hovered) {
       return (
         <i
-          className='ri-shopping-cart-line cart'
+          className="ri-shopping-cart-line cart"
           onClick={() => addToCart(img)}
         ></i>
-      )
+      );
     }
   }
 
@@ -51,11 +51,11 @@ function Image({ img, className }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img src={img.url} className='image-grid' />
+      <img src={img.url} className="image-grid" alt="heart-cart" />
       {heartIcon()}
       {cartIcon()}
     </div>
-  )
+  );
 }
 
 Image.propTypes = {
@@ -65,6 +65,6 @@ Image.propTypes = {
     url: PropTypes.string.isRequired,
     isFavorite: PropTypes.bool,
   }),
-}
+};
 
-export default Image
+export default Image;
